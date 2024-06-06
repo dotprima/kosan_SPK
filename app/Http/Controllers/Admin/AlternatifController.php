@@ -16,7 +16,7 @@ class AlternatifController extends Controller
     public function index()
     {
         $kriteria = Kriteria::orderby('id', 'asc')->get();
-        $alternatif = Alternatif::orderby('created_at', 'asc')->paginate(10);
+        $alternatif = Alternatif::orderby('created_at', 'desc')->get();
         return view('admin.alternatif.index', compact('kriteria','alternatif'));
     }
 
@@ -45,6 +45,10 @@ class AlternatifController extends Controller
             'C3' => 'required',
             'C4' => 'required',
             'C5' => 'required',
+            'C6' => 'required',
+            'C7' => 'required',
+            'C8' => 'required',
+            'C9' => 'required',
         ]);
 
         $alternatif = Alternatif::create([
@@ -54,6 +58,10 @@ class AlternatifController extends Controller
             'C3' => $request->C3,
             'C4' => $request->C4,
             'C5' => $request->C5,
+            'C6' => $request->C6,
+            'C7' => $request->C7,
+            'C8' => $request->C8,
+            'C9' => $request->C9,
         ]);
 
         return redirect()->back()->with('success','Data berhasil disimpan');
@@ -98,6 +106,10 @@ class AlternatifController extends Controller
             'C3' => 'required',
             'C4' => 'required',
             'C5' => 'required',
+            'C6' => 'required',
+            'C7' => 'required',
+            'C8' => 'required',
+            'C9' => 'required',
         ]);
 
         $alternatif = [
@@ -107,6 +119,10 @@ class AlternatifController extends Controller
             'C3' => $request->C3,
             'C4' => $request->C4,
             'C5' => $request->C5,
+            'C6' => $request->C6,
+            'C7' => $request->C7,
+            'C8' => $request->C8,
+            'C9' => $request->C9,
         ];
 
         Alternatif::whereId($id)->update($alternatif);

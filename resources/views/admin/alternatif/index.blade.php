@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="example" width="100%" cellspacing="0" >
+                <table class="table table-bordered" id="kriteriaTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -49,8 +49,22 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $alternatif->links() }}
             </div>
         </div>
     </div>
+@endsection
+
+@section('after-script')
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+
+
+            const kriteriaTable = document.getElementById('kriteriaTable');
+            if (kriteriaTable) {
+                new simpleDatatables.DataTable(kriteriaTable);
+            }
+
+
+        });
+    </script>
 @endsection
