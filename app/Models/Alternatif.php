@@ -13,4 +13,9 @@ class Alternatif extends Model
     public function kriteria(){
         return $this->belongsTo(Kriteria::class, 'kriteria_id', 'id');
     }
+
+    public function kosan()
+    {
+        return $this->belongsTo(Kosan::class);
+    }
 }

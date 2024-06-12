@@ -24,8 +24,14 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label>Nama Kost</label>
-                        <input type="text" class="form-control" name="nama" value="{{ $alternatif->nama }}" required>
+                        <label>Nama Kosan</label>
+                        <select class="form-control" name="kosan_id" required>
+                            @foreach($kosans as $kosan)
+                                <option value="{{ $kosan->id }}" {{ $alternatif->kosan_id == $kosan->id ? 'selected' : '' }}>
+                                    {{ $kosan->nama }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Jarak ke Kampus (km)</label>

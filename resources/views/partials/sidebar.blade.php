@@ -37,6 +37,13 @@
         SPK
     </div>
 
+
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('kosan.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Kosan</span></a>
+    </li>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('kriteria.index') }}">

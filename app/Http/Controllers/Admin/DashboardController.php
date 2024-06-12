@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Models\Kosan;
+use App\Models\Kriteria;
+use App\Models\Alternatif;
 
 class DashboardController extends Controller
 {
@@ -15,8 +18,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $totalKosan = Kosan::count();
+        $totalAlternatives = Alternatif::count();
+        $totalCriteria = Kriteria::count();
+    
+        // Example of more detailed statistics
+        $criteriaUsage = Alternatif::selectRaw('C1, count(*) as count')
+                            ->groupBy('C1')
+                            ->orderBy('C1')
+                            ->get();
+    
+        return view('admin.dashboard', compact('totalKosan', 'totalAlternatives', 'totalCriteria', 'criteriaUsage'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

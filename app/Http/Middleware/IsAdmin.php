@@ -19,10 +19,10 @@ class IsAdmin
     public function handle(Request $request, Closure $next)
     {
         if(!auth()->user()){
-            return redirect('/');
+            return redirect('/login');
         }
         if(!auth()->user()->is_admin){
-            return redirect('/');
+            return redirect('/login');
         //    return abort(403);
         }
         return $next($request);

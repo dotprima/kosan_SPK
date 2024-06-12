@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Kriteria;
 use App\Models\Alternatif;
+use App\Models\Kosan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,8 +18,8 @@ class AlternatifController extends Controller
     public function index()
     {
         $kriteria = Kriteria::orderby('id', 'asc')->get();
-        $alternatif = Alternatif::orderby('created_at', 'desc')->get();
-        return view('admin.alternatif.index', compact('kriteria','alternatif'));
+        $alternatif = Alternatif::with('kosan')->orderby('created_at', 'desc')->get();
+        return view('admin.alternatif.index', compact('kriteria', 'alternatif'));
     }
 
     /**
@@ -27,7 +29,12 @@ class AlternatifController extends Controller
      */
     public function create()
     {
-        return view('admin.alternatif.create');
+        // Get the ids of kosans that are already associated with an alternatif
+        $usedKosanIds = Alternatif::pluck('kosan_id');
+        // Get all kosans except those already associated
+        $kosans = Kosan::whereNotIn('id', $usedKosanIds)->get();
+        
+        return view('admin.alternatif.create', compact('kosans'));
     }
 
     /**
@@ -64,7 +71,7 @@ class AlternatifController extends Controller
             'C9' => $request->C9,
         ]);
 
-        return redirect()->back()->with('success','Data berhasil disimpan');
+        return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -86,10 +93,14 @@ class AlternatifController extends Controller
      */
     public function edit($id)
     {
-        $alternatif = Alternatif::findorfail($id);
-        return view('admin.alternatif.edit', compact('alternatif'));
-    }
+        $alternatif = Alternatif::findOrFail($id);
+        // Get the ids of kosans that are already associated with an alternatif, except for the current one
+        $usedKosanIds = Alternatif::where('id', '!=', $alternatif->id)->pluck('kosan_id');
+        // Get all kosans except those already associated, or include the current one
+        $kosans = Kosan::whereNotIn('id', $usedKosanIds)->orWhere('id', $alternatif->kosan_id)->get();
 
+        return view('admin.alternatif.edit', compact('alternatif', 'kosans'));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -127,7 +138,7 @@ class AlternatifController extends Controller
 
         Alternatif::whereId($id)->update($alternatif);
 
-        return redirect()->route('alternatif.index')->with('success','Data Berhasil di Update');
+        return redirect()->route('alternatif.index')->with('success', 'Data Berhasil di Update');
     }
 
     /**
@@ -141,7 +152,6 @@ class AlternatifController extends Controller
         $alternatif = Alternatif::findorfail($id);
         $alternatif->delete();
 
-        return redirect()->back()->with('success','Data Berhasil Dihapus');
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
 }
-

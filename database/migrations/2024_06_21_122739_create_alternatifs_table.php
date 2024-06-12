@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('alternatifs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
             $table->string('C1');
             $table->string('C2');
             $table->string('C3');
@@ -26,6 +25,9 @@ return new class extends Migration
             $table->string('C8');
             $table->string('C9');
             $table->timestamps();
+
+            $table->foreignId('kosan_id')->constrained('kosan')->onDelete('cascade');
+           
         });
     }
 

@@ -18,7 +18,18 @@ class AlternatifsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
+        $faker = Faker::create();
+
         for ($i = 0; $i < 50; $i++) {
+
+             // Create a related Kosan record for each Alternatif
+             $data = \App\Models\Kosan::create([
+                'nama' => $faker->company,
+                'alamat' => $faker->address,
+                'kontak' => $faker->phoneNumber,
+                'lokasi' => $faker->city,
+            ]);
+
             // Randomly assign values based on the defined scales for each criterion
             $C1 = $faker->randomElement([1, 2, 3, 4]); // Distance to campus in km, predefined scale
             $C2 = $faker->randomElement([1, 2, 3, 4]); // Cost of housing, predefined scale
@@ -30,8 +41,8 @@ class AlternatifsTableSeeder extends Seeder
             $C8 = $faker->randomElement(['prepaid', 'postpaid']); // Type of electricity
             $C9 = $faker->randomElement([2, 3, 5]); // Cleanliness, predefined scale
 
-            Alternatif::create([
-                'nama' => $faker->company,
+            $alternatif = Alternatif::create([
+                'kosan_id' => $data->id,
                 'C1'   => $C1,
                 'C2'   => $C2,
                 'C3'   => $C3,
@@ -42,6 +53,8 @@ class AlternatifsTableSeeder extends Seeder
                 'C8'   => $C8,
                 'C9'   => $C9,
             ]);
+
+           
         }
     }
 }

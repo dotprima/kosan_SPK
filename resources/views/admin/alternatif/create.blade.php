@@ -23,8 +23,14 @@
                 <form action="{{ route('alternatif.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Nama Kost</label>
-                        <input type="text" class="form-control" name="nama" required>
+                        <label>Nama Kosan</label>
+                        <select class="form-control" name="kosan_id" required>
+                            @foreach($kosans as $kosan)
+                                <option value="{{ $kosan->id }}">
+                                    {{ $kosan->nama }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Jarak ke Kampus (km)</label>

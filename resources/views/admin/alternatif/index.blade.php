@@ -13,7 +13,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Nama Kosan</th>
                             @foreach ($kriteria as $item)
                                 <th>{{ $item->nama }}</th>
                             @endforeach
@@ -25,7 +25,7 @@
                         @foreach ($alternatif as $key => $item)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->nama }}</td>
+                                <td>{{$item->kosan->nama}}</td>
                                 @foreach ($kriteria as $criterion)
                                     <td>{{ $item->{$criterion->kode} }}</td>
                                 @endforeach

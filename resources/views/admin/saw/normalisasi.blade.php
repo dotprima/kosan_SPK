@@ -15,7 +15,7 @@
             <tbody>
                 @foreach ($data as $item)
                     <tr>
-                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->kosan->nama }}</td>
                         @foreach ($criteria as $criterion)
                             <td>{{ number_format($normalizedData[$item->nama][$criterion->kode], 2) }}</td>
                         @endforeach
