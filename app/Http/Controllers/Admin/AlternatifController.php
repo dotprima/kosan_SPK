@@ -46,7 +46,7 @@ class AlternatifController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama' => 'required',
+            'kosan_id' => 'required',
             'C1' => 'required',
             'C2' => 'required',
             'C3' => 'required',
@@ -59,7 +59,7 @@ class AlternatifController extends Controller
         ]);
 
         $alternatif = Alternatif::create([
-            'nama' => $request->nama,
+            'kosan_id' => $request->kosan_id,
             'C1' => $request->C1,
             'C2' => $request->C2,
             'C3' => $request->C3,
@@ -111,7 +111,7 @@ class AlternatifController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama' => 'required',
+            'kosan_id' => 'required',
             'C1' => 'required',
             'C2' => 'required',
             'C3' => 'required',
@@ -124,7 +124,7 @@ class AlternatifController extends Controller
         ]);
 
         $alternatif = [
-            'nama' => $request->nama,
+            'kosan_id' => $request->kosan_id,
             'C1' => $request->C1,
             'C2' => $request->C2,
             'C3' => $request->C3,
