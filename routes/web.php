@@ -8,9 +8,11 @@ use \App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [HomeController::class,'index'])->name('homepage')->middleware('is_admin');
+Route::get('/', [DashboardController::class,'index'])->middleware('is_admin');
+
 Route::get('admin/dashboard', [DashboardController::class,'index'])->name('admin.dashboard.index')
 ->middleware('is_admin');
+
 Route::resource('admin/kosan', KosanController::class)->middleware('is_admin');
 Route::resource('admin/kriteria', KriteriaController::class)->middleware('is_admin');
 Route::resource('admin/alternatif', AlternatifController::class)->middleware('is_admin');
@@ -18,4 +20,3 @@ Route::get('admin/hitung', [HitungController::class, 'hitung'])->name('hitung')-
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('is_admin');

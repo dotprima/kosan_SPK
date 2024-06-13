@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend') }}/imgs/logo/logo.png">
 
-    <title>Admin-TukuMobil</title>
+    <title>Admin- Kosan SPK</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('backend') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

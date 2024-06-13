@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('homepage') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard.index') }}">
         <div class="sidebar-brand-icon ">
             {{-- <i href="{{ route('homepage') }}"><img src="{{ asset('backend') }}/img/logo.png" alt="logo"></i> --}}
         </div>
@@ -40,9 +40,9 @@
 
     
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('kosan.index') }}">
+        {{-- <a class="nav-link" href="{{ route('kosan.index') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Kosan</span></a>
+            <span>Kosan</span></a> --}}
     </li>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
