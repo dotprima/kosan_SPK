@@ -88,13 +88,11 @@ class KriteriaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'kode' => 'required',
             'nama' => 'required',
             'bobot' => 'required',
         ]);
 
         $kriteria = [
-            'kode' => $request->kode,
             'nama' => $request->nama,
             'bobot' => $request->bobot,
         ];
