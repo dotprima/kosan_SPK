@@ -1,131 +1,146 @@
-@extends('layouts.frontend')
+<!DOCTYPE html>
+<html lang="zxx">
 
-@section('content')
+<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/fort-html/HTML/main/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Jul 2024 13:19:36 GMT -->
 
+<head>
+    <title>Fort - Real Estate HTML Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
 
-    <main class="main">
-        <div class="page-header breadcrumb-wrap">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Beranda</a>
-                    <span></span> Login
-                </div>
-            </div>
-        </div>
-        <section class="pt-5 pb-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 m-auto">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
-                                    <div class="padding_eight_all bg-white">
-                                        <div class="heading_s1">
-                                            <h3 class="mb-30">Login</h3>
-                                        </div>
-                                        <form method="post" action="{{route('login')}}">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input type="text" required="" name="email" placeholder="Your Email":value="old('email')" required autofocus>
-                                            </div>
-                                            <div class="form-group">
-                                                <input required="" type="password" name="password" placeholder="Password" required autocomplete="current-password">
-                                            </div>
-                                            <div class="login_footer form-group">
-                                                <div class="chek-form">
-                                                    <div class="custome-checkbox">
-                                                        <input class="form-check-input" type="checkbox" name="remember" id="exampleCheckbox1" value="">
-                                                        <label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>
-                                                    </div>
-                                                </div>
-                                                <a class="text-muted" href="{{route('password.request')}}">Forgot password?</a>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
-                                            </div>
-                                        </form>
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/leaflet.css" type="text/css">
+    <link rel="stylesheet" href="css/map.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="css/skins/default.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,300,700">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="bg-grea-3">
+    <div class="page_loader"></div>
+
+    <!-- Contact section start -->
+    <div class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Form content box start -->
+                    <div class="form-content-box">
+                        <!-- details -->
+                        <div class="details">
+                            <!-- Logo -->
+                            <a href="index.html">
+                                <img src="img/black-logo.png" class="cm-logo" alt="black-logo">
+                            </a>
+                            <!-- Name -->
+                            <h3>Sign into your account</h3>
+                            <!-- Form start -->
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="email" name="email" class="input-text" placeholder="Email Address"
+                                        value="{{ old('email') }}" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="input-text" placeholder="Password"
+                                        required autocomplete="current-password">
+                                </div>
+                                <div class="checkbox">
+                                    <div class="ez-checkbox pull-left">
+                                        <label>
+                                            <input type="checkbox" name="remember" class="ez-hide">
+                                            Remember me
+                                        </label>
                                     </div>
+                                    <a href="{{ route('password.request') }}"
+                                        class="link-not-important pull-right">Forgot Password</a>
+                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
-                            <div class="col-lg-1"></div>
-                            <div class="col-lg-6">
-                               <img src="frontend/imgs/slider/slider-1.png">
-                            </div>
+                                <div class="form-group mb-0">
+                                    <button type="submit" class="btn-md button-theme btn-block">Login</button>
+                                </div>
+                            </form>
+
+
                         </div>
+
                     </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    <!-- Form content box end -->
                 </div>
             </div>
         </div>
     </div>
-</div> --}}
-@endsection
+    <!-- Contact section end -->
+
+    <!-- Full Page Search -->
+    <div id="full-page-search">
+        <button type="button" class="close">×</button>
+        <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites/fort-html/HTML/main/index.html#">
+            <input type="search" value="" placeholder="type keyword(s) here" />
+            <button type="submit" class="btn btn-sm button-theme">Search</button>
+        </form>
+    </div>
+
+    <script src="js/jquery-2.2.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-submenu.js"></script>
+    <script src="js/rangeslider.js"></script>
+    <script src="js/jquery.mb.YTPlayer.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.scrollUp.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-providers.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/jquery.filterizr.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script src="js/maps.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Custom javascript -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/fort-html/HTML/main/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Jul 2024 13:19:37 GMT -->
+
+</html>

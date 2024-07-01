@@ -25,7 +25,18 @@
                             <th>Lokasi</th>
                             <td>{{ $kosan->lokasi }}</td>
                         </tr>
+                        <tr>
+                            <th>Image</th>
+                            <td>
+                                @if ($kosan->image)
+                                    <img src="{{ asset('storage/' . $kosan->image) }}" alt="Image" width="100">
+                                @else
+                                    <img src="{{ asset('img/dummy.jpg') }}" alt="Dummy Image" width="100">
+                                @endif
+                            </td>
+                        </tr>
                     </table>
+                    <a href="{{ route('kosan.edit', $kosan->id) }}" class="btn btn-primary">Edit</a>
                 </div>
             </div>
         </div>

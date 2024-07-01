@@ -12,7 +12,7 @@ class Kosan extends Model
     protected $table = 'kosan';
 
     protected $fillable = [
-        'nama', 'alamat', 'kontak', 'lokasi', 'alternatif_id'
+        'nama', 'alamat', 'kontak', 'lokasi', 'alternatif_id', 'image'
     ];
 
   

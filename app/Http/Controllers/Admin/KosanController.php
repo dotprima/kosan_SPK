@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Kosan;
+use Illuminate\Support\Facades\Storage;
 
 class KosanController extends Controller
 {
@@ -30,12 +31,8 @@ class KosanController extends Controller
         return view('admin.kosan.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -43,9 +40,18 @@ class KosanController extends Controller
             'alamat' => 'required|string|max:255',
             'kontak' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Kosan::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public/images', $imageName);
+            $data['image'] = 'images/' . $imageName;
+        }
+
+        Kosan::create($data);
 
         return redirect()->route('kosan.index')->with('success', 'Data kosan berhasil ditambahkan');
     }
@@ -86,12 +92,28 @@ class KosanController extends Controller
             'alamat' => 'required|string|max:255',
             'kontak' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $kosan->update($request->all());
+        $data = $request->all();
 
-        return redirect()->route('kosan.index')->with('success', 'Data kosan berhasil diperbarui');
+        if ($request->hasFile('image')) {
+            // Delete the old image
+            if ($kosan->image) {
+                Storage::delete('public/' . $kosan->image);
+            }
+
+            // Store the new image
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public/images', $imageName);
+            $data['image'] = 'images/' . $imageName;
+        }
+
+        $kosan->update($data);
+
+        return redirect()->route('kosan.index')->with('success', 'Data kosan berhasil diupdate');
     }
+
 
     /**
      * Remove the specified resource from storage.

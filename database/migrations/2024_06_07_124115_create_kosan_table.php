@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('kontak');
             $table->string('lokasi');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

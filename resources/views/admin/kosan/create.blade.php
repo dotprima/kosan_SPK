@@ -22,7 +22,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tambah Kosan</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('kosan.store') }}" method="POST">
+                    <form action="{{ route('kosan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Nama</label>
@@ -39,6 +39,10 @@
                         <div class="form-group">
                             <label>Lokasi</label>
                             <input type="text" class="form-control" name="lokasi" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" class="form-control" name="image">
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>

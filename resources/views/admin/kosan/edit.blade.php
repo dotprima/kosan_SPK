@@ -22,7 +22,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Edit Kosan</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('kosan.update', $kosan->id) }}" method="POST">
+                    <form action="{{ route('kosan.update', $kosan->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -41,10 +41,15 @@
                             <label>Lokasi</label>
                             <input type="text" class="form-control" name="lokasi" value="{{ $kosan->lokasi }}" required>
                         </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" class="form-control" name="image">
+                            @if ($kosan->image)
+                                <img src="{{ asset('storage/' . $kosan->image) }}" alt="Image" width="100">
+                            @endif
+                        </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-@endsection
+        @endsection
