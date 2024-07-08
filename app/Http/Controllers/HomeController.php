@@ -10,7 +10,43 @@ use App\Models\Alternatif;
 
 class HomeController extends Controller
 {
+    // Define the mapping of criteria values to their numeric equivalents
+    function getCriteriaMapping()
+    {
+        return [
+            'C3' => [
+                '1' => 1,
+                '2a' => 2,
+                '2b' => 2,
+                '3a' => 3,
+                '6' => 6,
+                '3b' => 3,
+            ],
+            'C4' => [
+                '1' => 1,
+                '2a' => 2,
+                '2b' => 2,
+                '2c' => 2,
+                '4' => 4,
+                '3' => 3,
+            ],
+            'C5' => [
+                '1a' => 1,
+                '1b' => 1,
+                '1c' => 1,
+                '2a' => 2,
+                '2b' => 2,
+                '3' => 3,
+            ],
+            // Add mappings for other criteria with letter suffixes if needed
+        ];
+    }
 
+    // Function to get the numeric value of a criterion
+    function getNumericValue($criterionCode, $value, $criteriaMapping)
+    {
+        return isset($criteriaMapping[$criterionCode][$value]) ? $criteriaMapping[$criterionCode][$value] : $value;
+    }
     public function index()
     {
         $kosan = Kosan::limit(6)->get();
@@ -37,67 +73,64 @@ class HomeController extends Controller
         // Mengambil semua kriteria dan menghitung total bobot
         $criteria = Kriteria::all();
         $totalWeight = $criteria->sum('bobot');
-    
+
         // Mengambil semua alternatif
         $alternatives = Alternatif::with('kosan')->get();
-    
+
         // Mempersiapkan variabel untuk diteruskan ke view
         $widgets = [];
         $criteriaValues = [];
-    
+
         // Melakukan iterasi pada setiap kriteria
         foreach ($criteria as $criterion) {
-            if ($criterion->kode !== 'C8') {  // Melewati 'C8' untuk sementara
-                $min = Alternatif::min($criterion->kode); // Mengambil nilai minimum dari kriteria
-                $max = Alternatif::max($criterion->kode); // Mengambil nilai maksimum dari kriteria
-    
-                if ($min == $max) {
-                    $min -= 0.01;  // Menyesuaikan nilai untuk memungkinkan normalisasi
-                }
-    
-                $criteriaValues[$criterion->kode] = [
-                    'min' => $min,
-                    'max' => $max
-                ];
+
+            $min = floatval(Alternatif::min($criterion->kode)); // Mengambil nilai minimum dari kriteria
+            $max = floatval(Alternatif::max($criterion->kode)); // Mengambil nilai maksimum dari kriteria
+
+            if ($min == $max) {
+                $min -= 0.01;  // Menyesuaikan nilai untuk memungkinkan normalisasi
             }
-    
+
+            $criteriaValues[$criterion->kode] = [
+                'min' => $min,
+                'max' => $max
+            ];
+
+
             // Menghitung bobot masing-masing kriteria
             $widgets[$criterion->kode] = $criterion->bobot / $totalWeight;
         }
-    
+
         // Menghitung skor SAW untuk setiap alternatif
         $results = [];
         $normalizedData = [];
-    
+
         foreach ($alternatives as $alternative) {
             $score = 0;
             foreach ($criteria as $criterion) {
-                if ($criterion->kode == 'C8') {
-                    // Penanganan khusus untuk 'C8' karena bersifat kategorikal
-                    $value = $alternative->{$criterion->kode} == 'prepaid' ? 2 : 1;
-                } else {
-                    $value = $alternative->{$criterion->kode};
-                }
-    
-                if ($criterion->kode == 'C8') {
-                    // Langsung menggunakan nilai untuk perhitungan skor karena 'C8' tidak berada dalam rentang normal
-                    $normalized = $value;
-                } else {
-                    $normalized = $criterion->atribut == 'benefit' ?
-                        ($value - $criteriaValues[$criterion->kode]['min']) / ($criteriaValues[$criterion->kode]['max'] - $criteriaValues[$criterion->kode]['min']) : ($criteriaValues[$criterion->kode]['max'] - $value) / ($criteriaValues[$criterion->kode]['max'] - $criteriaValues[$criterion->kode]['min']);
-                }
-    
+                $value = $alternative->{$criterion->kode};
+
+                // Get the criteria mapping
+                $criteriaMapping = $this->getCriteriaMapping();
+
+                // Get the numeric value of the criterion using the mapping
+                $numericValue = $this->getNumericValue($criterion->kode, $value, $criteriaMapping);
+
+                // Perform normalization
+                $normalized =  $criterion->atribut == 'benefit' ?
+                    ($numericValue - $criteriaValues[$criterion->kode]['min']) / ($criteriaValues[$criterion->kode]['max'] - $criteriaValues[$criterion->kode]['min']) : ($criteriaValues[$criterion->kode]['max'] - $numericValue) / ($criteriaValues[$criterion->kode]['max'] - $criteriaValues[$criterion->kode]['min']);
+
                 $normalizedData[$alternative->nama][$criterion->kode] = $normalized;
                 $score += $normalized * $widgets[$criterion->kode];
             }
             $results[$alternative->kosan->nama] = $score;
         }
-    
+
         // Mengurutkan hasil berdasarkan skor secara menurun
         arsort($results);
-    
+
         $recommendedKosan = Kosan::whereIn('nama', array_keys($results))->get();
-    
+
         // Meneruskan data yang diperlukan ke view
         return view('rekomendasi', [
             'results' => $results,
@@ -109,5 +142,4 @@ class HomeController extends Controller
             'recommendedKosan' => $recommendedKosan
         ]);
     }
-    
 }

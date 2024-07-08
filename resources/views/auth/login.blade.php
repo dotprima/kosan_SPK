@@ -4,7 +4,7 @@
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/fort-html/HTML/main/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Jul 2024 13:19:36 GMT -->
 
 <head>
-    <title>Fort - Real Estate HTML Template</title>
+    <title>Kosan Bagus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
 

@@ -30,106 +30,144 @@
                                     <td>
                                         @switch($criterion->kode)
                                             @case('C1')
-                                                @if ($item->C1 == 1)
-                                                <= 0.05 km @elseif($item->C1 == 2)> 0.05 - 0.25 km
-                                                    @elseif($item->C1 == 3)
-                                                        > 0.25 - 1 km
-                                                    @else
-                                                        > 1 - 2.5 km
+                                                @if ($item->C1 == 170)
+                                                    170 M
+                                                @elseif($item->C1 == 100)
+                                                    100 M
+                                                @elseif($item->C1 == 250)
+                                                    250 M
+                                                @elseif($item->C1 == 1000)
+                                                    1 Km
+                                                @elseif($item->C1 == 1.5)
+                                                    1,5 Km
+                                                @else
+                                                    1,9 Km
                                                 @endif
                                             @break
 
                                             @case('C2')
-                                                @if ($item->C2 == 1)
-                                                <= Rp 700,000 - Rp 900,000 @elseif($item->C2 == 2)> Rp 900,000 - Rp
-                                                        1,300,000
-                                                    @elseif($item->C2 == 3)
-                                                        > Rp 1,300,000 - Rp 1,600,000
-                                                    @else
-                                                        > Rp 1,600,000 - Rp 2,000,000
+                                                @if ($item->C2 == 12)
+                                                    Rp 12.000.000
+                                                @elseif($item->C2 == 14)
+                                                    Rp 14.000.000
+                                                @elseif($item->C2 == 9.6)
+                                                    Rp 9.600.000
+                                                @elseif($item->C2 == 6)
+                                                    Rp 6.000.000
+                                                @elseif($item->C2 == 4.56)
+                                                    Rp 4.560.000
+                                                @else
+                                                    Rp 4.200.000
                                                 @endif
                                             @break
 
                                             @case('C3')
                                                 @if ($item->C3 == 1)
-                                                    Kasur, Lemari - Sangat tidak lengkap
-                                                @elseif($item->C3 == 2)
-                                                    Kasur, Lemari, Kipas - Tidak Lengkap
-                                                @elseif($item->C3 == 3)
-                                                    Kasur, Lemari, Kipas/AC & kamar mandi dalam - Cukup Lengkap
+                                                    Kamar Mandi Luar dan Fasilitas Kamar Kosong - Sangat Tidak Lengkap
+                                                @elseif($item->C3 == '2a')
+                                                    Kamar Mandi Dalam, Fasilitas Kamar Kosong - Tidak Lengkap
+                                                @elseif($item->C3 == '2b')
+                                                    Kasur Dan Kamar Mandi Luar - Kurang Lengkap
+                                                @elseif($item->C3 == '3a')
+                                                    Kasur, Lemari Dan Kamar Mandi Luar - Cukup Lengkap
+                                                @elseif($item->C3 == 6)
+                                                    Kasur, Lemari, AC, Wifi, Kamar Mandi Dalam Dan Parkir Luas - Sangat Lengkap
                                                 @else
-                                                    Kasur, Lemari, Kipas/AC, kamar mandi dalam, Wifi & parkir Luas - Lengkap
+                                                    Kasur, Lemari Dan Kamar Mandi dalam - Cukup
                                                 @endif
                                             @break
 
                                             @case('C4')
                                                 @if ($item->C4 == 1)
-                                                    Dekat dengan tempat hiburan - Sangat tidak lengkap
-                                                @elseif($item->C4 == 2)
-                                                    Dekat dengan tempat makan dan tempat hiburan - Tidak Lengkap
-                                                @elseif($item->C4 == 3)
-                                                    Dekat dengan tempat makan, tempat ibadah dan tempat hiburan - Cukup Lengkap
+                                                    Jauh Dengan Tempat Makan dan Tempat Ibadah - Sangat Tidak Lengkap
+                                                @elseif($item->C4 == '2a')
+                                                    Dekat Dengan Tempat Makan Dan Tempat Ibadah Jauh - Tidak Lengkap
+                                                @elseif($item->C4 == '2b')
+                                                    Dekat Tempat Ibadah Dan Tempat Makan Jauh - Kurang Lengkap
+                                                @elseif($item->C4 == '2c')
+                                                    Dekat Denag Tempat Makan Dan Tempat Ibadah - Cukup Lengkap
+                                                @elseif($item->C4 == 4)
+                                                    Dekat Denag Tempat Makan Warung, Tempat Ibadah Dan Cafe - Sangat Lengkap
                                                 @else
-                                                    Dekat dengan tempat makan, warung, tempat ibadah dan tempat hiburan - Lengkap
-                                                @endif
-                                            @break
-
-                                            @case('C5')
-                                                @if ($item->C5 == 1)
-                                                    3x3
-                                                @elseif($item->C5 == 2)
-                                                    3x4
-                                                @elseif($item->C5 == 3)
-                                                    4x5
-                                                @else
-                                                    5x6
+                                                    Dekat Denag Tempat Makan, Warung Dan Tempat Ibadah - Cukup
                                                 @endif
                                             @break
 
                                             @case('C6')
-                                                @if ($item->C6 == 1)
-                                                    Tidak ada keamanan
-                                                @elseif($item->C6 == 2)
-                                                    Satpam atau penjaga
-                                                @elseif($item->C6 == 3)
-                                                    CCTV
+                                                @if ($item->C5 == 3)
+                                                    1.5x2
+                                                @elseif($item->C5 == 4)
+                                                    2x2
+                                                @elseif($item->C5 == 6)
+                                                    2x3
+                                                @elseif($item->C5 == 7.5)
+                                                    2.5x3
+                                                @elseif($item->C5 == 9)
+                                                    3x3
                                                 @else
-                                                    CCTV dan satpam atau penjaga
+                                                    3.5x3
+                                                @endif
+                                            @break
+
+                                            @case('C5')
+                                                @if ($item->C6 == '1a')
+                                                    Tidak Ada Keamanan
+                                                @elseif($item->C6 == '1b')
+                                                    Penjaga Kosan
+                                                @elseif($item->C6 == '1c')
+                                                    Satpam
+                                                @elseif($item->C6 == '2a')
+                                                    CCTV Dan Penjaga Kosan
+                                                @elseif($item->C6 == '2b')
+                                                    CCTV Dan Satpam
+                                                @else
+                                                    CCTV, Satpam Dan Penjaga Kosan
                                                 @endif
                                             @break
 
                                             @case('C7')
-                                                @if ($item->C7 == 1)
-                                                    21:00-22:00
-                                                @elseif($item->C7 == 2)
-                                                    23:00-24:00
-                                                @elseif($item->C7 == 3)
-                                                    01:00-02:00
+                                                @if ($item->C7 == 20)
+                                                    Jam 20:00 Wib
+                                                @elseif($item->C7 == 19)
+                                                    Jam 19:00 Wib
+                                                @elseif($item->C7 == 21)
+                                                    Jam 21:00 Wib
+                                                @elseif($item->C7 == 22)
+                                                    Jam 22:00 Wib
+                                                @elseif($item->C7 == 23)
+                                                    Jam 23:00 Wib
                                                 @else
-                                                    Tidak ada batas jam malam
+                                                    Tidak Di Batasi Waktu
                                                 @endif
                                             @break
 
                                             @case('C8')
-                                                @if ($item->C8 == 3)
-                                                    Prabayar/token listrik
+                                                @if ($item->C8 == 1)
+                                                    Pascabayar/Token Listrik
                                                 @else
-                                                    Pascabayar/bulanan
+                                                    Pascabayar/Bulanan
                                                 @endif
                                             @break
 
                                             @case('C9')
-                                                @if ($item->C9 == 2)
-                                                    Di Bersihkan Setiap Hari
-                                                @elseif($item->C9 == 3)
-                                                    Di Bersihkan Setiap Minggu
+                                                @if ($item->C9 == 10)
+                                                    Dibersihkan Setiap Hari
+                                                @elseif($item->C9 == 8)
+                                                    Dibersihkan Seminggu Sekali
+                                                @elseif($item->C9 == 6)
+                                                    Dibersihkan Tiga Minggu Sekali
+                                                @elseif($item->C9 == 4)
+                                                    Dibersihkan Sebulan Sekali
+                                                @elseif($item->C9 == 2)
+                                                    Dibersihkan Dua Bulan Sekali
                                                 @else
-                                                    Di Bersihkan Setiap Bulan
+                                                    Dibersihkan Tiga Bulan Sekali
                                                 @endif
                                             @break
                                         @endswitch
                                     </td>
                                 @endforeach
+
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('alternatif.edit', $item->id) }}"

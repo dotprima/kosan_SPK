@@ -57,9 +57,7 @@
     <header class="main-header fixed-header-2">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand company-logo" href="index.html">
-                    <img src="img/logos/black-logo.png" alt="logo">
-                </a>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
